@@ -23,8 +23,8 @@ if (isset($update['update']['message']['id'])){
 if (isset($update['update']['message']['date'])) {
     if (mindate(time()) == mindate($update['update']['message']['date'])) {
         include 'main.php';
-        echo 'Im including';
+        echo 'Im including\n';
     } else {
-        echo "I'm receving old messages";
+        echo "I'm receving old messages\n";
     }
 }
