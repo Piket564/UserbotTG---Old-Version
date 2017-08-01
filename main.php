@@ -1,6 +1,6 @@
 <?php
 /*codice*/
-require_once 'funzioni.php';
+//require_once 'funzioni.php';
 $isadmin   = false;
 $are_admin = array(152500233); //Insert here admin_ids
 $isadmin   = false;
