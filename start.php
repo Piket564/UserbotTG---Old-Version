@@ -59,11 +59,11 @@ $offset = 0;
 while (true) {
     $updates = $MadelineProto->API->get_updates(['offset' => $offset, 'limit' => 100, 'timeout' => 0]);
     foreach ($updates as $update) {
-        $offset = $update['update_id'] + 1;
+        $offset = $update['update_id']+1;
         try {
             $res = json_encode($update, JSON_PRETTY_PRINT);
             if ($res == '') {
-                $res = print_r($update, true);
+                $res = var_export($update, true);
             }
             include("config.php");
         } catch (\danog\MadelineProto\RPCErrorException $e) {
