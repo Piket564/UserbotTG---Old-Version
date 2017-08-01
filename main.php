@@ -129,26 +129,26 @@ if($msg==".callMe"){
     //$controller->configuration["network_type"] = \danog\MadelineProto\VoIP::NET_TYPE_WIFI; // Default is NET_TYPE_ETHERNET
     //$controller->configuration["data_saving"] = \danog\MadelineProto\VoIP::DATA_SAVING_NEVER; // Default is DATA_SAVING_NEVER
     //$controller->parseConfig(); // Always call this after changing settings
-    // We need to receive updates in order to know that the other use accepted the call
     while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_READY) {
         $MadelineProto->get_updates();
         if($controller->getCallState() == \danog\MadelineProto\VoIP::CALL_STATE_READY){
             $key=$controller->getVisualization();
-            sm($chatID,$key);
+            file_put_contents('logs/emojii.json',json_encode($key,JSON_PRETTY_PRINT));
+            //sm($chatID,$key);
         }
     }
-    var_dump($controller->getVisualization());
+    //var_dump($controller->getVisualization());
     while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_ENDED) {
         $MadelineProto->get_updates();
     }
 }
-$howmany = 300;
+/*$howmany = 300;
 $offset = 0;
 while ($howmany > 255) {
-    $updates = $MadelineProto->API->get_updates(['offset' => $offset, 'limit' => 50, 'timeout' => 0]); // Just like in the bot API, you can specify an offset, a limit and a timeout
+    $updates = $MadelineProto->API->get_updates(['offset' => $offset, 'limit' => 50, 'timeout' => 0]);
     foreach ($updates as $update) {
         \danog\MadelineProto\Logger::log([$update]);
-        $offset = $update['update_id'] + 1; // Just like in the bot API, the offset must be set to the last update_id
+        $offset = $update['update_id'] + 1;
         switch ($update['update']['_']) {
             case 'updatePhoneCall':
                 if (is_object($update['update']['phone_call']) && $update['update']['phone_call']->getCallState() === \danog\MadelineProto\VoIP::CALL_STATE_INCOMING) {
@@ -158,7 +158,4 @@ while ($howmany > 255) {
         }
     }
     echo 'Wrote '.\danog\MadelineProto\Serialization::serialize('session.madeline', $MadelineProto).' bytes'.PHP_EOL;
-}
-
-
-
+}*/

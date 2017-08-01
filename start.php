@@ -60,10 +60,12 @@ while (true) {
     $updates = $MadelineProto->API->get_updates(['offset' => $offset, 'limit' => 100, 'timeout' => 0]);
     foreach ($updates as $update) {
         $offset = $update['update_id']+1;
+        //file_put_contents("logs/logs1.log",var_dump($update));
+        //file_put_contents("logs/logs2.log",var_dump($updates));
         try {
             $res = json_encode($update, JSON_PRETTY_PRINT);
             if ($res == '') {
-                $res = print_r($update, true);
+                $res = var_export($update, true);
             }
             include("config.php");
         } catch (\danog\MadelineProto\RPCErrorException $e) {
