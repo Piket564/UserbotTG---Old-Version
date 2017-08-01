@@ -67,11 +67,11 @@ while (true) {
             }
             include("config.php");
         } catch (\danog\MadelineProto\RPCErrorException $e) {
-            echo "Si e' verificato un errore di tipo RPCException:".\danog\MadelineProto\Logger::log([$e->getMessage()], \danog\MadelineProto\Logger::NOTICE);
+             \danog\MadelineProto\Logger::log(["Si e' verificato un errore di tipo RPCException: ".$e->getMessage()], \danog\MadelineProto\Logger::NOTICE);
             file_put_contents('logs/RPCException.log',$e->getMessage());
         } catch (\danog\MadelineProto\Exception $e) {
 
-            echo "Si e' verificato un errore di tipo Exception:".\danog\MadelineProto\Logger::log([$e->getMessage()], \danog\MadelineProto\Logger::NOTICE);
+            \danog\MadelineProto\Logger::log(["Si e' verificato un errore di tipo Exception: ".$e->getMessage()], \danog\MadelineProto\Logger::NOTICE);
             file_put_contents('logs/Exception.log',$e->getMessage());
         }
     }
