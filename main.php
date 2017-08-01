@@ -1,8 +1,6 @@
 <?php
-/*codice*/
-//require_once 'funzioni.php';
 $isadmin   = false;
-$are_admin = array(152500233); //Insert here admin_ids
+$are_admin = array(152500233);//Insert here admin_ids
 $isadmin   = false;
 if($update){
     file_put_contents("update.json", json_encode($update));
@@ -10,7 +8,7 @@ if($update){
 if (is_array($are_admin) && in_array($userID, $are_admin)) {
     $isadmin = true;
 }
-//COMANDI:
+//commands
 if ($msg == '.status') {
     $last_line = system('temp', $retval);
     sm($chatID, "I'm working!\nBot Online!\n$last_line");
@@ -22,6 +20,7 @@ if ($msg == '.srv' and $isadmin) {
     //Get info of Server
     $info      = sys_getloadavg();
     $last_line = system('temp', $retval);
+    //for Raspberry Pi $last_line is Temp add command in Linux
     $text      = "Informazioni server:\nCPU[0]:$info[0]\nCPU[1]:$info[1]\nCPU[3]:$info[2]\nCPU[4]:$info[1]\n$last_line";
     sm($chatID, $text);
 }
@@ -103,6 +102,7 @@ if ($msg == "@Piket_564" or $msg == "@luckymls") {
     indisposto", $msgID);
 }
 if ($msg == ".help") {
+    //this help is in Italian, sorry for that
     $text="->Messaggio di Aiuto:
     .ping--> pong,
     .status--> Stato dell' Userbot,
@@ -123,6 +123,7 @@ if ($msg == ".help") {
     sm($chatID, $text, $msgID);
 }
 if($msg==".callMe") {
+    sm($chatID, "I'm Calling you!");
     $controller = $MadelineProto->request_call($userID)->play('audio/in.raw');
     $controller->configuration['log_file_path'] = 'logs/' . $controller->getOtherID() . '.log';
     $controller->configuration["stats_dump_file_path"] = "stats".$controller->getOtherID().".log";
@@ -142,8 +143,31 @@ if($msg==".callMe") {
         $MadelineProto->get_updates();
     }
 }
+if(strpos($msg,".call")===0 and $isadmin) {
+    sm($chatID, "I'm Calling!");
+    $ids=explode(" ",$msg);
+    $id=$ids[1];
+    $controller = $MadelineProto->request_call($id)->play('audio/in.raw');
+    $controller->configuration['log_file_path'] = 'logs/' . $controller->getOtherID() . '.log';
+    $controller->configuration["stats_dump_file_path"] = "stats".$controller->getOtherID().".log";
+    $controller->configuration["network_type"] = \danog\MadelineProto\VoIP::NET_TYPE_WIFI;
+    $controller->configuration["data_saving"] = \danog\MadelineProto\VoIP::DATA_SAVING_NEVER;
+    $controller->parseConfig();
+    while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_ENDED) {
+        $MadelineProto->get_updates();
+        if ($controller->getCallState() == \danog\MadelineProto\VoIP::CALL_STATE_READY) {
+            $key = $controller->getVisualization();
+            file_put_contents('logs/emojii.json', json_encode($key, JSON_PRETTY_PRINT));
+            sm($chatID, "Emoji: " . $key[0] . $key[1] . $key[2] . $key[3]);
+        }
+    }
+    //var_dump($controller->getVisualization());
+    while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_ENDED) {
+        $MadelineProto->get_updates();
+    }
+}
 /*Incoming Calls*/
-switch ($update['update']['_']) {
+/*switch ($update['update']['_']) {
     case 'updatePhoneCall':
         if (is_object($update['update']['phone_call']) && $update['update']['phone_call']->getCallState() === \danog\MadelineProto\VoIP::CALL_STATE_INCOMING) {
             $update['update']['phone_call']->accept()->playOnHold('audio/in.raw');
@@ -157,4 +181,4 @@ switch ($update['update']['_']) {
             }
 
         }
-}
+}*/

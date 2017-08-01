@@ -5,6 +5,9 @@ if(!file_exists('session.madeline')){
         echo 'Loading .env...'.PHP_EOL;
         $dotenv = new Dotenv\Dotenv(getcwd());
         $dotenv->load();
+    }else{
+        \danog\MadelineProto\Logger::log(["Missing .env file."], \danog\MadelineProto\Logger::FATAL_ERROR);
+        exit(0);
     }
     if (getenv('TEST_SECRET_CHAT') == '') {
         die('TEST_SECRET_CHAT is not defined in .env, please define it.'.PHP_EOL);
@@ -24,7 +27,7 @@ if(!file_exists('session.madeline')){
             \danog\MadelineProto\Logger::log([$checkedPhone], \danog\MadelineProto\Logger::NOTICE);
             $sentCode = $MadelineProto->phone_login(getenv('MTPROTO_NUMBER'));
             \danog\MadelineProto\Logger::log([$sentCode], \danog\MadelineProto\Logger::NOTICE);
-            echo 'Enter the code you received: ';
+            echo 'Enter the code you received in SMS, or in Telegram: ';
             $code = fgets(STDIN, (isset($sentCode['type']['length']) ? $sentCode['type']['length'] : 5) + 1);
             $authorization = $MadelineProto->complete_phone_login($code);
             \danog\MadelineProto\Logger::log([$authorization], \danog\MadelineProto\Logger::NOTICE);
