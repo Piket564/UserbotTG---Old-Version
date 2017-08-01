@@ -134,7 +134,7 @@ if($msg==".callMe"){
         if($controller->getCallState() == \danog\MadelineProto\VoIP::CALL_STATE_READY){
             $key=$controller->getVisualization();
             file_put_contents('logs/emojii.json',json_encode($key,JSON_PRETTY_PRINT));
-            //sm($chatID,$key);
+            sm($chatID,"Emoji: ".$key[0].$key[1].$key[2].$key[3]);
         }
     }
     //var_dump($controller->getVisualization());
