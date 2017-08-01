@@ -131,7 +131,6 @@ if($msg==".callMe") {
     $controller->parseConfig();
     while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_ENDED) {
         $MadelineProto->get_updates();
-    }
         if ($controller->getCallState() == \danog\MadelineProto\VoIP::CALL_STATE_READY) {
             $key = $controller->getVisualization();
             file_put_contents('logs/emojii.json', json_encode($key, JSON_PRETTY_PRINT));
