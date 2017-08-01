@@ -122,19 +122,20 @@ if ($msg == ".help") {
     {Pagina Telegraph}.";
     sm($chatID, $text, $msgID);
 }
-if($msg==".callMe"){
+if($msg==".callMe") {
     $controller = $MadelineProto->request_call($userID)->play('audio/in.raw');
-    $controller->configuration['log_file_path'] = 'logs/'.$controller->getOtherID().'.log';
-    //$controller->configuration["stats_dump_file_path"] = "stats".$controller->getOtherID().".log"; // Default is /dev/null
-    //$controller->configuration["network_type"] = \danog\MadelineProto\VoIP::NET_TYPE_WIFI; // Default is NET_TYPE_ETHERNET
-    //$controller->configuration["data_saving"] = \danog\MadelineProto\VoIP::DATA_SAVING_NEVER; // Default is DATA_SAVING_NEVER
-    //$controller->parseConfig(); // Always call this after changing settings
-    while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_READY) {
+    $controller->configuration['log_file_path'] = 'logs/' . $controller->getOtherID() . '.log';
+    $controller->configuration["stats_dump_file_path"] = "stats".$controller->getOtherID().".log";
+    $controller->configuration["network_type"] = \danog\MadelineProto\VoIP::NET_TYPE_WIFI;
+    $controller->configuration["data_saving"] = \danog\MadelineProto\VoIP::DATA_SAVING_NEVER;
+    $controller->parseConfig();
+    while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_ENDED) {
         $MadelineProto->get_updates();
-        if($controller->getCallState() == \danog\MadelineProto\VoIP::CALL_STATE_READY){
-            $key=$controller->getVisualization();
-            file_put_contents('logs/emojii.json',json_encode($key,JSON_PRETTY_PRINT));
-            sm($chatID,"Emoji: ".$key[0].$key[1].$key[2].$key[3]);
+    }
+        if ($controller->getCallState() == \danog\MadelineProto\VoIP::CALL_STATE_READY) {
+            $key = $controller->getVisualization();
+            file_put_contents('logs/emojii.json', json_encode($key, JSON_PRETTY_PRINT));
+            sm($chatID, "Emoji: " . $key[0] . $key[1] . $key[2] . $key[3]);
         }
     }
     //var_dump($controller->getVisualization());
@@ -142,20 +143,19 @@ if($msg==".callMe"){
         $MadelineProto->get_updates();
     }
 }
-/*$howmany = 300;
-$offset = 0;
-while ($howmany > 255) {
-    $updates = $MadelineProto->API->get_updates(['offset' => $offset, 'limit' => 50, 'timeout' => 0]);
-    foreach ($updates as $update) {
-        \danog\MadelineProto\Logger::log([$update]);
-        $offset = $update['update_id'] + 1;
-        switch ($update['update']['_']) {
-            case 'updatePhoneCall':
-                if (is_object($update['update']['phone_call']) && $update['update']['phone_call']->getCallState() === \danog\MadelineProto\VoIP::CALL_STATE_INCOMING) {
-                    $update['update']['phone_call']->accept()->play('audio/in.raw');
-                    //$howmany--;
+/*Incoming Calls*/
+switch ($update['update']['_']) {
+    case 'updatePhoneCall':
+        if (is_object($update['update']['phone_call']) && $update['update']['phone_call']->getCallState() === \danog\MadelineProto\VoIP::CALL_STATE_INCOMING) {
+            $update['update']['phone_call']->accept()->playOnHold('audio/in.raw');
+            while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_ENDED) {
+                $MadelineProto->get_updates();
+                if ($controller->getCallState() == \danog\MadelineProto\VoIP::CALL_STATE_READY) {
+                    $key = $controller->getVisualization();
+                    file_put_contents('logs/emojii.json', json_encode($key, JSON_PRETTY_PRINT));
+                    sm($userID, "Emoji: " . $key[0] . $key[1] . $key[2] . $key[3]);
                 }
+            }
+
         }
-    }
-    echo 'Wrote '.\danog\MadelineProto\Serialization::serialize('session.madeline', $MadelineProto).' bytes'.PHP_EOL;
-}*/
+}
