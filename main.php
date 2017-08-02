@@ -159,10 +159,6 @@ if(strpos($msg,".twitter")===0){
     $string = json_decode($twitter->setGetfield($getfield)
         ->buildOauth($url, $requestMethod)
         ->performRequest(),$assoc = TRUE);
-    if($string["errors"][0]["message"] != "") {
-        $text="Errore non gestito! Usare un username di Twitter!\n\nCode:".$string["errors"][0]["message"];
-        sm($chatID,$text);
-    }
     foreach($string as $items)
     {
         if(isset($items['text'])){
