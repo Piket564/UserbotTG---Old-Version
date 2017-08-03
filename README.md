@@ -5,7 +5,7 @@ A Userbot is an account Telegram a User with all power that a User have.
 ## Getting Started
 Firs of all, in a VPS or in a Rasperry Pi or a Linux based System (VPS is better).
 Make you have LAMP with php7.0, php7.0-dev, composer and git installed, for Ubuntu example:
-```
+```shell
 sudo apt-get install python-software-properties software-properties-common
 sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 sudo apt-get update
@@ -23,7 +23,7 @@ Test with:
 composer
 ```
 Results:
-```
+```shell
 Output
    ______
   / ____/___  ____ ___  ____  ____  ________  _____
@@ -62,7 +62,7 @@ composer update
 
 Now you can just download my repo and copy in MadelineProto directory, to complete the .env file, go to [my.telegram.org](my.telegram.org):
 
-```
+```shell
 MTPROTO_NUMBER= [NUMBER]
 MTPROTO_SETTINGS={"app_info":{"api_id":[API_ID],"api_hash":"[API_HASH]"}} 
 TEST_USERNAME= [USERNAME]
@@ -73,7 +73,7 @@ BOT_TOKEN=
 ```
 Now with [createnew.php]() we can create a new session.madeline or just register a new Account!
 
-```
+```shell
 $ php7.0 createnew.php
 #LOGS#
 MTProto:                We're in NL, current dc is 2, nearest dc is 4.
