@@ -1,5 +1,4 @@
 # UserbotTG
-[WIKI](<http://telegra.ph/Only-new-Userbot-Client-with-MadelineProto-08-01>)
 This is a client for Madeline Proto, that is a very cool progect. These files enable you to join in a very fun Userbot world.
 A Userbot is an account Telegram a User with all power that a User have.
 ## Getting Started
