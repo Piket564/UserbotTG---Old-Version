@@ -18,7 +18,7 @@ sudo apt-get install php7.0-dev
 sudo apt-get install curl git
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 ```
-Teste with:
+Test with:
 ```
 composer
 ```
