@@ -1,5 +1,5 @@
 <?php
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 if (file_exists('.env')) {
     echo 'Loading .env...'.PHP_EOL;
     $dotenv = new Dotenv\Dotenv(getcwd());
