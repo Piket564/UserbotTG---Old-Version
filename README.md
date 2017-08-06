@@ -1,6 +1,8 @@
 # UserbotTG
 This is a client for Madeline Proto, that is a very cool progect. These files enable you to join in a very fun Userbot world.
 A Userbot is an account Telegram a User with all power that a User have.
+
+[DOCS MadelineProto](https://daniil.it/MadelineProto/) Read Before!
 ## Getting Started
 Firs of all, in a VPS or in a Rasperry Pi or a Linux based System (VPS is better).
 Make you have LAMP with php7.0, php7.0-dev, composer and git installed, for Ubuntu example:
@@ -205,14 +207,14 @@ For any question [Group](https://t.me/joinchat/CRb4CULOIoKNzudShPZR-Q).
 Enjoy!
 
 ## Contributing
-
 Please read https://daniil.it/MadelineProto/ docs.
 
 Very thanks to 
 * ***Daniil Gentili* - [Danil](https://t.me/danogentili)
 
+All Groups of PWRT, MadelineProto, OTIdev, Altervista Bot, Altervista Userbot and Telegram ITALIA.
+
 ## Authors
 
 * ***ZioAlb3r* - *start.php* - [Zio](https://t.me/ZioAlb3r)
 * ***Piket_564* - *all other files and BugFix* - [Piket](https://t.me/Piket_564)
- 

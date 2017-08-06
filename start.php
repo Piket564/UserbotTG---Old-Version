@@ -27,10 +27,6 @@ if(!file_exists('session.madeline')){
         $inputFile = $MadelineProto->upload($inputfile);
         $MadelineProto->photos->uploadProfilePhoto(['file' => $inputFile]);
     }
-    function reply($chatID,$text,$tomsgId){
-        global $MadelineProto;
-        $MadelineProto->messages->sendMessage(['peer' => $chatID, 'message' => $text, 'reply_to_msg_id' => $tomsgId]);
-    }
     function join_chat($chat){
         global $MadelineProto;
         $MadelineProto->messages->importChatInvite(['hash' => $chat ]);
@@ -49,7 +45,7 @@ if(!file_exists('session.madeline')){
         global $MadelineProto;
         if (isset($chatID) and isset($msgid)) var_export($MadelineProto->messages->readHistory(['peer' => $chatID, 'max_id' => $msgid]));
     }
-    function scrivendo($chatID) {
+    function isWriting($chatID) {
         global $update;
         global $MadelineProto;
         if (isset($chatID)) {
