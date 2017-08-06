@@ -17,9 +17,23 @@ sudo apt-get install php7.0-dev
 sudo apt-get install curl git
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 ```
-Test with:
+For Debian Linux 8.X JESSIE
+```shell
+sudo apt-get install curl
+curl https://www.dotdeb.org/dotdeb.gpg | sudo apt-key add -
+echo 'deb http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list
+echo 'deb-src http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get install php7.0
+----------------------------------------------------------------------------
+sudo apt-get update
+sudo apt-get install curl php5-cli git
+sudo php7.0 /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+```shell
 ```
-composer
+Test with:
+```shell
+$ composer
 ```
 Results:
 ```shell
@@ -48,7 +62,7 @@ Options:
 
 . . .
 ```
-Now you can use this simple [php.sh](https://daniil.it/php.sh "php.sh") tool made by [Daniil Gentili](https://daniil.it/ "Daniil Gentili") for installing all the other stuff for MadelineProto.
+Or, you can use this simple [php.sh](https://daniil.it/php.sh "php.sh") tool made by [Daniil Gentili](https://daniil.it/ "Daniil Gentili") for installing all the other stuff for MadelineProto.
 
 After that in a empty direcory:
 ```
@@ -174,12 +188,21 @@ if ($msg == '.start') {
 }
 ?>
 ```
+## API Twitter Search
+There is a [.twitter]() command, in $items we can find:
+```
+$items['created_at']
+$items['text']
+$items['user']['name']
+$items['user']['followers_count']
+$items['user']['friends_count']
+$items['user']['listed_count']
+```
+
+
 Please write all Issue to my [@piketLimitato_bot](https://t.me/piketLimitato_bot), if is a very big Issue just write on GitHub!
-
+For any question [Group](https://t.me/joinchat/CRb4CULOIoKNzudShPZR-Q).
 Enjoy!
-## Troubleshooting
-
-Be Patient!
 
 ## Contributing
 
@@ -192,3 +215,4 @@ Very thanks to
 
 * ***ZioAlb3r* - *start.php* - [Zio](https://t.me/ZioAlb3r)
 * ***Piket_564* - *all other files and BugFix* - [Piket](https://t.me/Piket_564)
+ 

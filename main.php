@@ -143,39 +143,36 @@ if ($msg == ".help") {
 require_once('API/twitterApi.php');
 if(strpos($msg,".twitter")===0){
     $e=explode(" ",$msg);
-    $user=$e[1];
-    /** Set access tokens here - see: https://dev.twitter.com/apps/ **/
-    /*https://github.com/J7mbo/twitter-api-php*/
-    $settings = array(
-        'oauth_access_token' => "",
-        'oauth_access_token_secret' => "",
-        'consumer_key' => "",
-        'consumer_secret' => ""
-    );
-    $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
-    $requestMethod = "GET";
-    $getfield = '?screen_name='.$user.'&count=1';
-    $twitter = new TwitterAPIExchange($settings);
-    $string = json_decode($twitter->setGetfield($getfield)
-        ->buildOauth($url, $requestMethod)
-        ->performRequest(),$assoc = TRUE);
-    foreach($string as $items)
-    {
-        if(isset($items['text'])){
-            $text="Last Tweet of <b>".$items['user']['name']."</b>\n\xF0\x9F\x93\x8B \n".$items['text'];
-            scrivendo($chatID);
-            sm($chatID,$text);
+    $users=$e[1];
+    $user=explode("@",$users);
+    if(isset($user[0]) and isset($user[1])){
+        sm($chatID,$user[1]);
+        /** Set access tokens here - see: https://dev.twitter.com/apps/ **/
+        /*https://github.com/J7mbo/twitter-api-php*/
+        $settings = array(
+            'oauth_access_token' => "",
+            'oauth_access_token_secret' => "",
+            'consumer_key' => "",
+            'consumer_secret' => ""
+        );
+        $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+        $requestMethod = "GET";
+        $getfield = '?screen_name='.$user[1].'&count=1';
+        $twitter = new TwitterAPIExchange($settings);
+        $string = json_decode($twitter->setGetfield($getfield)
+            ->buildOauth($url, $requestMethod)
+            ->performRequest(),$assoc = TRUE);
+        foreach($string as $items) {
+            if (isset($items['text'])) {
+                $text = "Last Tweet of <b>" . $items['user']['name'] . "</b>\n\xF0\x9F\x93\x8B \n" . $items['text'];//see Docs for $items
+                scrivendo($chatID);
+                sm($chatID, $text);
+            }
         }
-        /*echo "Time and Date of Tweet: ".$items['created_at']."<br />";
-        echo "Tweet: ". $items['text']."<br />";
-        echo "Tweeted by: ". $items['user']['name']."<br />";
-        echo "Screen name: ". $items['user']['screen_name']."<br />";
-        echo "Followers: ". $items['user']['followers_count']."<br />";
-        echo "Friends: ". $items['user']['friends_count']."<br />";
-        echo "Listed: ". $items['user']['listed_count']."<br /><hr />";*/
-        //All $items in Echo
+    }else{
+        sm($chatID,"Error!\n.twitter @USER");
     }
-}
+}//Twitter Search
 /*
 if($msg==".callMe") {
     sm($chatID, "I'm Calling you!");
