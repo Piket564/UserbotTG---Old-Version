@@ -8,11 +8,12 @@ if($update){
 if (is_array($are_admin) && in_array($userID, $are_admin)) {
     $isadmin = true;
 }
+date_default_timezone_set('Europe/Rome');//TimeZones
 //commands
 if ($msg == '.status') {
-    $last_line = system('temp', $retval);
     isWriting($chatID);
-    sm($chatID, "I'm working!\nBot Online!\n$last_line");
+    $date = date('m/d/Y h:i:s a', time());
+    sm($chatID, "I'm working!\nBot Online!\n$date");
 }
 if ($msg == '.ping') {
     isWriting($chatID);
