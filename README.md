@@ -3,6 +3,11 @@ This is a client for Madeline Proto, that is a very cool progect. These files en
 A Userbot is an account Telegram a User with all power that a User have.
 
 [DOCS MadelineProto](https://daniil.it/MadelineProto/) Read Before!
+
+[DOCS IT](https://t.me/MadelineProtoUserBotIT)Read Before!
+
+[DOCS EN]()Soon!
+
 ## Getting Started
 Firs of all, in a VPS or in a Rasperry Pi or a Linux based System (VPS is better).
 Make you have LAMP with php7.0, php7.0-dev, composer and git installed, for Ubuntu example:
