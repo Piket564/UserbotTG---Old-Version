@@ -202,13 +202,8 @@ $items['user']['followers_count']
 $items['user']['friends_count']
 $items['user']['listed_count']
 ```
-<<<<<<< HEAD
-## Calls
 
-Now .callMe and .call [Username,ID] works properly, if there is any problem look at Tips page!
-=======
-##Calls
->>>>>>> origin/master
+## Calls
 
 Now .callMe and .call [Username,ID] works properly, if there is any problem look at Tips page!
 Code for call from [magna.php]:
