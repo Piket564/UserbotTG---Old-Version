@@ -203,8 +203,8 @@ $items['user']['friends_count']
 $items['user']['listed_count']
 ```
 ##Calls
-Now .callMe and .call [Username,ID] works properly, if there is any problem look at Tips page!
 
+Now .callMe and .call [Username,ID] works properly, if there is any problem look at Tips page!
 Code for call from [magna.php]:
 
 ```php
