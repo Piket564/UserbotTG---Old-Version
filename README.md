@@ -2,11 +2,8 @@
 This is a client for Madeline Proto, that is a very cool progect. These files enable you to join in a very fun Userbot world.
 A Userbot is an account Telegram a User with all power that a User have.
 
-[DOCS MadelineProto](https://daniil.it/MadelineProto/) Read Before!
+**_[DOCS MadelineProto](https://daniil.it/MadelineProto/) Read Before!_**
 
-[DOCS IT](https://t.me/MadelineProtoUserBotIT)Read Before!
-
-[DOCS EN]()Soon!
 
 ## Getting Started
 Firs of all, in a VPS or in a Rasperry Pi or a Linux based System (VPS is better).
@@ -205,11 +202,101 @@ $items['user']['followers_count']
 $items['user']['friends_count']
 $items['user']['listed_count']
 ```
+##Calls
+Now .callMe and .call [Username,ID] works properly, if there is any problem look at Tips page!
 
+Code for call from [magna.php]:
+
+```php
+<?php
+if (is_object($update['update']['phone_call']) && isset($update['update']['phone_call']->madeline) && $update['update']['phone_call']->getCallState() === \danog\MadelineProto\VoIP::CALL_STATE_INCOMING) {
+    $update['update']['phone_call']->configuration['enable_NS'] = false;
+    $update['update']['phone_call']->configuration['enable_AGC'] = false;
+    $update['update']['phone_call']->configuration['enable_AEC'] = false;
+    $update['update']['phone_call']->configuration['shared_config'] = [
+        'audio_init_bitrate' => 40 * 1000,
+        'audio_max_bitrate' => 50 * 1000,
+        'audio_min_bitrate' => 15 * 1000,
+        //'audio_bitrate_step_decr' => 0,
+        //'audio_bitrate_step_incr' => 2000,
+        ];                                        
+        $update['update']['phone_call']->parseConfig();
+        if ($update['update']['phone_call']->accept() === false) {
+            echo 'DID NOT ACCEPT A CALL';
+        }
+        $calls[$update['update']['phone_call']->getOtherID()] = $update['update']['phone_call'];
+        $update['update']['phone_call']->play('audio/in.raw');
+     }
+```
+This code is the core for accepting calls. See [start.php].
+```php
+<?php
+if($msg==".callMe") {
+    sm($userID, "I'm calling you!");
+    $controller = $MadelineProto->request_call($userID)->play('audio/in.raw');
+    $controller->configuration['log_file_path'] = 'logs/' . $controller->getOtherID() . '.log';
+    $controller->configuration["stats_dump_file_path"] = "logs/stats" . $controller->getOtherID() . ".log";
+    $controller->configuration["network_type"] = \danog\MadelineProto\VoIP::NET_TYPE_WIFI;
+    $controller->configuration["data_saving"] = \danog\MadelineProto\VoIP::DATA_SAVING_NEVER;
+    $controller->configuration['shared_config'] = [
+        'audio_init_bitrate' => 40 * 1000,
+        'audio_max_bitrate' => 50 * 1000,
+        'audio_min_bitrate' => 15 * 1000,
+        //'audio_bitrate_step_decr' => 0,
+        //'audio_bitrate_step_incr' => 2000,
+    ];
+    $controller->parseConfig();
+    while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_READY) {
+        $MadelineProto->get_updates();
+        if ($controller->getCallState() == \danog\MadelineProto\VoIP::CALL_STATE_READY) {
+            $key = $controller->getVisualization();
+            file_put_contents('logs/emojii.json', json_encode($key, JSON_PRETTY_PRINT));
+            sm($userID, "Emoji: " . $key[0] . $key[1] . $key[2] . $key[3]);
+        }
+    }
+    //var_dump($controller->getVisualization());
+    while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_ENDED) {
+        $MadelineProto->get_updates();
+    }
+}
+if(strpos($msg,".call")===0 and $isadmin and $msg!=".callMe") {
+    sm($chatID, "I'm Calling!");
+    $ids=explode(" ",$msg);
+    $id=$ids[1];
+    $controller = $MadelineProto->request_call($id)->play('audio/in.raw');
+    $controller->configuration['log_file_path'] = 'logs/' . $controller->getOtherID() . '.log';
+    $controller->configuration["stats_dump_file_path"] = "logs/stats".$controller->getOtherID().".log";
+    $controller->configuration["network_type"] = \danog\MadelineProto\VoIP::NET_TYPE_WIFI;
+    $controller->configuration["data_saving"] = \danog\MadelineProto\VoIP::DATA_SAVING_NEVER;
+    $controller->configuration['shared_config'] = [
+        'audio_init_bitrate' => 40 * 1000,
+        'audio_max_bitrate'  => 50 * 1000,
+        'audio_min_bitrate'  => 15 * 1000,
+        //'audio_bitrate_step_decr' => 0,
+        //'audio_bitrate_step_incr' => 2000,
+    ];
+    $controller->parseConfig();
+    while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_READY) {
+        $MadelineProto->get_updates();
+        if ($controller->getCallState() == \danog\MadelineProto\VoIP::CALL_STATE_READY) {
+            $key = $controller->getVisualization();
+            file_put_contents('logs/emojii.json', json_encode($key, JSON_PRETTY_PRINT));
+            sm($chatID, "Emoji: " . $key[0] . $key[1] . $key[2] . $key[3]);
+        }
+    }
+    //var_dump($controller->getVisualization());
+    while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_READY) {
+        $MadelineProto->get_updates();
+    }
+}
+```
+##Tips
 
 Please write all Issue to my [@piketLimitato_bot](https://t.me/piketLimitato_bot), if is a very big Issue just write on GitHub!
 For any question [Group](https://t.me/joinchat/CRb4CULOIoKNzudShPZR-Q).
 Enjoy!
+
+Help page: http://telegra.ph/Help-Page-08-06
 
 ## Contributing
 Please read https://daniil.it/MadelineProto/ docs.
