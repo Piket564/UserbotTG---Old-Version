@@ -202,7 +202,8 @@ $items['user']['followers_count']
 $items['user']['friends_count']
 $items['user']['listed_count']
 ```
-##Calls
+## Calls
+
 Now .callMe and .call [Username,ID] works properly, if there is any problem look at Tips page!
 
 Code for call from [magna.php]:
@@ -290,7 +291,7 @@ if(strpos($msg,".call")===0 and $isadmin and $msg!=".callMe") {
     }
 }
 ```
-##Tips
+## Tips
 
 Please write all Issue to my [@piketLimitato_bot](https://t.me/piketLimitato_bot), if is a very big Issue just write on GitHub!
 For any question [Group](https://t.me/joinchat/CRb4CULOIoKNzudShPZR-Q).
