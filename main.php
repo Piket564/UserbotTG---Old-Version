@@ -17,12 +17,12 @@ if ($msg == '.status') {
     sm($chatID,"I'm Workink!\nBot Online!",$msgID);
 }
 if ($msg == ".help") {
-    scrivendo($chatID);
+    isWriting($chatID);
     $text="<a href='http://telegra.ph/Help-Page-08-06'>HELP!</a>\n\nDirectory test for main.php";
     sm($chatID, $text, $msgID);
 }
 if($msg==".gitHub"){
-    scrivendo($chatID);
+    isWriting($chatID);
     $text="https://github.com/Piket564/UserbotTG/";
     sm($chatID, $text, $msgID);
 }
@@ -83,4 +83,17 @@ if(strpos($msg,".call")===0 and $isadmin and $msg!=".callMe") {
     while ($controller->getCallState() < \danog\MadelineProto\VoIP::CALL_STATE_READY) {
         $MadelineProto->get_updates();
     }
+}
+
+if(strpos($msg,'.joinCh') === 0 and $isadmin){
+    $link = explode('https://t.me/', $msg);
+    isWriting($chatID);
+    sm($chatID,"Sto Entrando...");
+    join_channel($link[1]);
+}
+if(strpos($msg,'.leftCh') === 0){
+    $link = explode('https://t.me/', $msg);
+    isWriting($chatID);
+    sm($chatID,"Sto Uscendo...");
+    leave_chat($link[1]);
 }
