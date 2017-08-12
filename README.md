@@ -208,7 +208,6 @@ $items['user']['listed_count']
 ## Calls
 
 Ora .callMe e .call [Username,ID] funziona correttamente con il codice di [magna.php]:
-
 ```php
 <?php
 if (is_object($update['update']['phone_call']) && isset($update['update']['phone_call']->madeline) && $update['update']['phone_call']->getCallState() === \danog\MadelineProto\VoIP::CALL_STATE_INCOMING) {
