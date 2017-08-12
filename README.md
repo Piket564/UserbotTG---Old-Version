@@ -1,13 +1,14 @@
 # UserbotTG
-This is a client for Madeline Proto, that is a very cool progect. These files enable you to join in a very fun Userbot world.
-A Userbot is an account Telegram a User with all power that a User have.
+Questa è una base per MadelineProto, un client costruito per Telegram. 
 
-**_[DOCS MadelineProto](https://daniil.it/MadelineProto/) Read Before!_**
+**_[DOCS MadelineProto](https://daniil.it/MadelineProto/) Leggere Prima!_**
 
+## Iniziamo
+Prima di tutto, controlla di avere una VPS o un Raspberry Pi (anche un PC con distro Linux) 
+con installato LAMP, php7.0, php7.0-dev, composer e git. Potrebbero volerci altri pacchetti ma Google 
+è tuo amico.
 
-## Getting Started
-Firs of all, in a VPS or in a Rasperry Pi or a Linux based System (VPS is better).
-Make you have LAMP with php7.0, php7.0-dev, composer and git installed, for Ubuntu example:
+Per Ubuntu:
 ```shell
 sudo apt-get install python-software-properties software-properties-common
 sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
@@ -21,7 +22,7 @@ sudo apt-get install php7.0-dev
 sudo apt-get install curl git
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 ```
-For Debian Linux 8.X JESSIE
+Per Debian 8.X JESSIE
 ```shell
 sudo apt-get install curl
 curl https://www.dotdeb.org/dotdeb.gpg | sudo apt-key add -
@@ -35,11 +36,11 @@ sudo apt-get install curl php5-cli git
 sudo php7.0 /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 ```shell
 ```
-Test with:
+Testiamo con:
 ```shell
 $ composer
 ```
-Results:
+Risultato:
 ```shell
 Output
    ______
@@ -66,19 +67,19 @@ Options:
 
 . . .
 ```
-Or, you can use this simple [php.sh](https://daniil.it/php.sh "php.sh") tool made by [Daniil Gentili](https://daniil.it/ "Daniil Gentili") for installing all the other stuff for MadelineProto.
+Per facilitarti la vita [Daniil Gentili](https://daniil.it/ "Daniil Gentili") ha creato [php.sh](https://daniil.it/php.sh "php.sh") per installare tutto. 
 
-After that in a empty direcory:
+Dopo aver installato tutto in una Directory vuota:
 ```
 git clone https://github.com/danog/MadelineProto.git
 cd MadelineProto
 composer update
 ```
+Ci ritroveremo con la cartella di MadelineProto.
 
-## Do something
+## Creiamo l'userbot
 
-Now you can just download my repo and copy in MadelineProto directory, to complete the .env file, go to [my.telegram.org](my.telegram.org):
-
+Scaricate la mia Base e copiatela nella Cartella MadelineProto, per completare il .env file recatevi in [my.telegram.org](my.telegram.org):
 ```shell
 MTPROTO_NUMBER= [NUMBER]
 MTPROTO_SETTINGS={"app_info":{"api_id":[API_ID],"api_hash":"[API_HASH]"}} 
@@ -88,7 +89,8 @@ TEST_DESTINATION_GROUPS=["@pwrtelegramgroup","@pwrtelegramgroupita"]
 TEST_SECRET_CHAT= @YOUR_USERNAME
 BOT_TOKEN=
 ```
-Now with [createnew.php]() we can create a new session.madeline or just register a new Account!
+
+Ora, con [createnew.php]() possiamo creare una sessione di Madeline. (session.madeline).
 
 ```shell
 $ php7.0 createnew.php
@@ -180,20 +182,21 @@ Wrote 343232 bytes
 This script will be close soon, it create session.madeline, it is your userbot. Please use php7.0 start.php again
 #ENDLOGS#
 ```
-Yeeee! Now, we have a session.madeline, sometimes is good to recreate the session.madeline.
+Perfetto, abbiamo creato quello che ci interessava. (NB. tra una versione e l'altra di Madeline è bene ricreare la sessione, spesso si può corrompere).
 
-Now, just add some shit code to [main.php]() and is done!
+Aggiungiamo il nostro codice in [main.php]().
 
 ```php
 <?php
 if ($msg == '.start') {
-    scrivendo($chatID);//function for is writing... on bar! Thx Danog!
+    isWriting($chatID);//function for is writing... on bar! Thx Danog!
     sm($chatID, "I'm working!\nBot Online!");//function on start.php
 }
 ?>
 ```
 ## API Twitter Search
-There is a [.twitter]() command, in $items we can find:
+
+Esiste il comando [.twitter](), in $items possiamo trovare:
 ```
 $items['created_at']
 $items['text']
@@ -202,16 +205,9 @@ $items['user']['followers_count']
 $items['user']['friends_count']
 $items['user']['listed_count']
 ```
-<<<<<<< HEAD
 ## Calls
 
-Now .callMe and .call [Username,ID] works properly, if there is any problem look at Tips page!
-=======
-##Calls
->>>>>>> origin/master
-
-Now .callMe and .call [Username,ID] works properly, if there is any problem look at Tips page!
-Code for call from [magna.php]:
+Ora .callMe e .call [Username,ID] funziona correttamente con il codice di [magna.php]:
 
 ```php
 <?php
@@ -234,7 +230,7 @@ if (is_object($update['update']['phone_call']) && isset($update['update']['phone
         $update['update']['phone_call']->play('audio/in.raw');
      }
 ```
-This code is the core for accepting calls. See [start.php].
+Per accettare le chiamate usare questo codice, o guardare in [start.php].
 ```php
 <?php
 if($msg==".callMe") {
@@ -298,21 +294,20 @@ if(strpos($msg,".call")===0 and $isadmin and $msg!=".callMe") {
 ```
 ## Tips
 
-Please write all Issue to my [@piketLimitato_bot](https://t.me/piketLimitato_bot), if is a very big Issue just write on GitHub!
-For any question [Group](https://t.me/joinchat/CRb4CULOIoKNzudShPZR-Q).
-Enjoy!
+Potete scrivermi tutti i problemi a [@piketLimitato_bot](https://t.me/piketLimitato_bot), se ci sono gravi errori aprite un Issue.
 
 Help page: http://telegra.ph/Help-Page-08-06
 
 ## Contributing
-Please read https://daniil.it/MadelineProto/ docs.
+Leggere https://daniil.it/MadelineProto/ docs.
 
-Very thanks to 
-* ***Daniil Gentili* - [Danil](https://t.me/danogentili)
+Un enorme grazie a: 
+* ***Daniil Gentili* - [Danil](https://t.me/danogentili), per aver creato MadelinProto.
 
-All Groups of PWRT, MadelineProto, OTIdev, Altervista Bot, Altervista Userbot and Telegram ITALIA.
+Tutti i gruppi ed utenti come PWRT, MadelineProto,[Lorenzo Maffii](https://t.me/WMD_Lorenzo),[Grizzly](https://t.me/Grizzly22),[Ganja](https://t.me/Ganjailcinese), Altervista Bot e gran parte di Telegram ITALIA.
 
 ## Authors
 
+* ***luckymls* - *First Commit* - [luckymls](https://t.me/@luckymls)
 * ***ZioAlb3r* - *start.php* - [Zio](https://t.me/ZioAlb3r)
 * ***Piket_564* - *all other files and BugFix* - [Piket](https://t.me/Piket_564)

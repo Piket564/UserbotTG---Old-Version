@@ -78,7 +78,6 @@ if(!file_exists('session.madeline')){
         }
     }
     $offset = 0;
-    $offset = 0;
     while (true) {
         $updates = $MadelineProto->API->get_updates(['offset' => $offset, 'limit' => 100, 'timeout' => 0]);
         foreach ($updates as $update) {
