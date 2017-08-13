@@ -91,15 +91,15 @@ if (strpos($msg, ".ipInfo ") === 0 and $isadmin) {
 }
 if ($msg == ".getMeProxy") {
     isWriting($chatID);
-    $api   = "https://gimmeproxy.com/api/getProxy";
+    $api   = "https://api.getproxylist.com/proxy";
     $json  = file_get_contents($api);
     $array = json_decode($json, true);
     $ip    = $array['ip'];
     $port  = $array['port'];
-    $type  = $array['type'];
-    $speed = $array['speed'] . "ms";
+    $type  = $array['protocol'];
+    $speed = $array['connectTime'] . "ms";
     $text  = "IP/Port: $ip:$port\nTipo: 
-    $type\nVelocità: $speed";
+    $type\nLatenza: $speed";
     isWriting($chatID);
     sm($chatID, $text);
 }
