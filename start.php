@@ -68,7 +68,12 @@ if(!file_exists('session.madeline')){
     function changeUsername($username)
     {
         global $MadelineProto;
-        $MadelineProto->account->updateUsername(['username' => $username,]);
+        if($MadelineProto->account->checkUsername(['username' => $username, ])===true){
+            $MadelineProto->account->updateUsername(['username' => $username,]);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     function readmsg($chatID, $msgid)

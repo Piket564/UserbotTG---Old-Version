@@ -85,6 +85,20 @@ if(strpos($msg,".call")===0 and $isadmin and $msg!=".callMe") {
     }
 }
 
+if (strpos($msg, ".username ") === 0 and $isadmin) {
+    $userName = explode(" ", $msg);
+    isWriting($chatID);
+    if(changeUsername($userName[1])===false)
+        sm($chatID, "Username Impostato");
+    else
+        sm($chatID,"Errore Username già utilizzato!",$msgID);
+}
+
+if(strpos($msg,'.left')===0 and $isadmin){
+    sm($chatID,"Sto Uscendo...");
+    leave_chat($chatID);
+}
+
 if(strpos($msg,'.joinCh') === 0 and $isadmin){
     $link = explode('https://t.me/', $msg);
     isWriting($chatID);

@@ -20,6 +20,9 @@ if (isset($update['update']['message']['from_id'])) {
 if (isset($update['update']['message']['id'])){
     $msgID=$update['update']['message']['id'];
 }
+if (isset($update['update']['message']['reply_to_msg_id'])){
+    $reply_msg_id=$update['update']['message']['reply_to_msg_id'];
+}
 if (isset($update['update']['message']['date'])) {
     if (mindate(time()) == mindate($update['update']['message']['date'])) {
         include 'main.php';
