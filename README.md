@@ -372,4 +372,4 @@ Tutti i gruppi ed utenti come PWRT, MadelineProto,[Lorenzo Maffii](https://t.me/
 
 * ***luckymls* - *First Commit* - [luckymls](https://t.me/@luckymls)
 * ***ZioAlb3r* - *start.php* - [Zio](https://t.me/ZioAlb3r)
-* ***Piket_564* - *all other files and BugFix* - [Piket](https://t.me/Piket_564) - [WebSite](https://www.lordpiket.xyz)
+* ***Piket_564* - *all other files and BugFix* - [Piket](https://t.me/Piket_564) - [WebSite](https://www.lordpiketweb.xyz)
