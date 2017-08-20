@@ -18,7 +18,7 @@ if ($msg == '.status') {
 }
 if ($msg == ".help") {
     isWriting($chatID);
-    $text="<a href='http://telegra.ph/Help-Page-08-06'>HELP!</a>\n\nDirectory test for main.php";
+    $text="Testing!";
     sm($chatID, $text, $msgID);
 }
 if($msg==".gitHub"){
@@ -105,9 +105,14 @@ if(strpos($msg,'.joinCh') === 0 and $isadmin){
     sm($chatID,"Sto Entrando...");
     join_channel($link[1]);
 }
-if(strpos($msg,'.leftCh') === 0){
+if(strpos($msg,'.leftCh') === 0 and $isadmin){
     $link = explode('https://t.me/', $msg);
     isWriting($chatID);
     sm($chatID,"Sto Uscendo...");
     leave_chat($link[1]);
+}
+
+if(strpos($msg,'.yt') === 0){
+    $link = explode(' ', $msg);
+    ytCall($chatID,$link[1],$userID);
 }

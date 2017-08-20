@@ -1,7 +1,9 @@
-# UserbotTG
+# Userbot - PHP 
 Questa è una base per MadelineProto, un client costruito per Telegram. 
 
 **_[DOCS MadelineProto](https://daniil.it/MadelineProto/) Leggere Prima!_**
+
+**_ATTENZIONE! All'interno delle DOCS di Madeline è spiegato tutto molto attentamente, questa è SOLO una Base!_**
 
 ## Iniziamo
 Prima di tutto, controlla di avere una VPS o un Raspberry Pi (anche un PC con distro Linux) 
@@ -9,7 +11,7 @@ con installato LAMP, php7.0, php7.0-dev, composer e git. Potrebbero volerci altr
 è tuo amico.
 
 Per Ubuntu:
-```shell
+```bash
 sudo apt-get install python-software-properties software-properties-common
 sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 sudo apt-get update
@@ -23,7 +25,7 @@ sudo apt-get install curl git
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 ```
 Per Debian 8.X JESSIE
-```shell
+```bash
 sudo apt-get install curl
 curl https://www.dotdeb.org/dotdeb.gpg | sudo apt-key add -
 echo 'deb http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list
@@ -34,14 +36,14 @@ sudo apt-get install php7.0
 sudo apt-get update
 sudo apt-get install curl php5-cli git
 sudo php7.0 /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
-```shell
 ```
+
 Testiamo con:
-```shell
+```bash
 $ composer
 ```
 Risultato:
-```shell
+```
 Output
    ______
   / ____/___  ____ ___  ____  ____  ________  _____
@@ -69,18 +71,68 @@ Options:
 ```
 Per facilitarti la vita [Daniil Gentili](https://daniil.it/ "Daniil Gentili") ha creato [php.sh](https://daniil.it/php.sh "php.sh") per installare tutto. 
 
-Dopo aver installato tutto in una Directory vuota:
+Sempre per facilitarvi la vita ho scritto qualche riga per installare MadelineProto e copiare la base all'interno.
+
+Il file crea in ```/root ``` le directory: ```/root/userBot/MadelineProto/``` e ```/root/userBot/UserbotTG/```.
+Usando poi il ```.env``` e ```createnew.php``` create la Sessione.
+
 ```
-git clone https://github.com/danog/MadelineProto.git
-cd MadelineProto
-composer update
+root@raspberrypi:~# ./sh.sh
+
+#     #                                                      ######  #     # ######
+#     #  ####  ###### #####  #####   ####  #####             #     # #     # #     #
+#     # #      #      #    # #    # #    #   #               #     # #     # #     #
+#     #  ####  #####  #    # #####  #    #   #      #####    ######  ####### ######
+#     #      # #      #####  #    # #    #   #               #       #     # #
+#     # #    # #      #   #  #    # #    #   #               #       #     # #
+ #####   ####  ###### #    # #####   ####    #               #       #     # #
+
+
+Initialized empty Git repository in /root/userBot/.git/
+Cloning into 'MadelineProto'...
+remote: Counting objects: 30709, done.
+remote: Compressing objects: 100% (1364/1364), done.
+remote: Total 30709 (delta 1640), reused 1158 (delta 997), pack-reused 28341
+Receiving objects: 100% (30709/30709), 42.44 MiB | 3.08 MiB/s, done.
+Resolving deltas: 100% (25248/25248), done.
+Checking connectivity... done.
+Do not run Composer as root/super user! See https://getcomposer.org/root for details
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+^[Package operations: 14 installs, 0 updates, 0 removals
+  - Installing danog/primemodule (dev-master 837ca72): Cloning 837ca7270c
+  - Installing danog/magicalserializer (dev-master fe4f6dc): Cloning fe4f6dc437
+  - Installing paragonie/constant_time_encoding (v2.0.3): Downloading (100%)
+  - Installing paragonie/random_compat (v2.0.10): Downloading (100%)
+  - Installing phpseclib/phpseclib (dev-master 200c2a9): Cloning 200c2a9
+  - Installing phpseclib/phpseclib (dev-master 200c2a9): Downloading (100%)
+  - Installing vlucas/phpdotenv (v2.4.0): Downloading (100%)
+  - Installing erusev/parsedown (1.6.3): Downloading (100%)
+  - Installing fluent/logger (v1.0.1): Downloading (100%)
+  - Installing psr/log (1.0.2): Downloading (100%)
+  - Installing rollbar/rollbar (v1.3.1): Downloading (100%)
+  - Installing webmozart/assert (1.2.0): Downloading (100%)
+  - Installing phpdocumentor/reflection-common (1.0): Downloading (100%)
+  - Installing phpdocumentor/type-resolver (0.3.0): Downloading (100%)
+  - Installing phpdocumentor/reflection-docblock (3.2.2): Downloading (100%)
+Writing lock file
+Generating autoload files
+Installazione di Madeline Conclusa, scarico la base
+Cloning into 'UserbotTG'...
+remote: Counting objects: 162, done.
+remote: Compressing objects: 100% (103/103), done.
+remote: Total 162 (delta 91), reused 100 (delta 48), pack-reused 0
+Receiving objects: 100% (162/162), 14.08 MiB | 3.05 MiB/s, done.
+Resolving deltas: 100% (91/91), done.
+Checking connectivity... done.
+Installazione Conclusa!
+
 ```
-Ci ritroveremo con la cartella di MadelineProto.
 
 ## Creiamo l'userbot
 
-Scaricate la mia Base e copiatela nella Cartella MadelineProto, per completare il .env file recatevi in [my.telegram.org](my.telegram.org):
-```shell
+Per completare il .env file recatevi in [my.telegram.org](my.telegram.org):
+```dotenv
 MTPROTO_NUMBER= [NUMBER]
 MTPROTO_SETTINGS={"app_info":{"api_id":[API_ID],"api_hash":"[API_HASH]"}} 
 TEST_USERNAME= [USERNAME]
@@ -92,7 +144,7 @@ BOT_TOKEN=
 
 Ora, con [createnew.php]() possiamo creare una sessione di Madeline. (session.madeline).
 
-```shell
+```text
 $ php7.0 createnew.php
 #LOGS#
 MTProto:                We're in NL, current dc is 2, nearest dc is 4.
@@ -205,9 +257,20 @@ $items['user']['followers_count']
 $items['user']['friends_count']
 $items['user']['listed_count']
 ```
+## Youtube-dl
+
+Nella cartella Api è presente la ```youtube-dl``` una libreria fatta apposta per youtube, tramite essa siamo in grado di scaricare l'audio (o il video guarda [youtube-dl docs](https://github.com/rg3/youtube-dl/blob/master/README.md#readme)) di un video postato su Youtube, tramite ffmpeg utilizzando le DOCS di Daniil su MadelineProto viene all'occhio :
+
+Input/output audio can be converted from/to any audio/video file using ffmpeg
+ 
+ ```bash
+ ffmpeg -i anyaudioorvideo -f s16le -ac 1 -ar 48000 -acodec pcm_s16le output.raw
+ ```
+Quindi facendo qualche ragionamento, insieme al gruppo di Supporto e a Daniil, sono riuscito ad aggiungere il comando ```.yt``` (potete cambiare nome) comodamente inserito nella funzione: ```ytCall([CHATID],[LINK COMPLETO],[USERID]);```, la funzione ha già all'interno ciò che serve comunque la trovare in [start.php](https://github.com/Piket564/UserbotTG/blob/master/start.php)
+
 ## Calls
 
-Ora .callMe e .call [Username,ID] funziona correttamente con il codice di [magna.php]:
+Ora .callMe e .call [Username,ID] funzionano correttamente con il codice di [magna.php]:
 ```php
 <?php
 if (is_object($update['update']['phone_call']) && isset($update['update']['phone_call']->madeline) && $update['update']['phone_call']->getCallState() === \danog\MadelineProto\VoIP::CALL_STATE_INCOMING) {
@@ -309,4 +372,4 @@ Tutti i gruppi ed utenti come PWRT, MadelineProto,[Lorenzo Maffii](https://t.me/
 
 * ***luckymls* - *First Commit* - [luckymls](https://t.me/@luckymls)
 * ***ZioAlb3r* - *start.php* - [Zio](https://t.me/ZioAlb3r)
-* ***Piket_564* - *all other files and BugFix* - [Piket](https://t.me/Piket_564)
+* ***Piket_564* - *all other files and BugFix* - [Piket](https://t.me/Piket_564) - [WebSite](https://www.lordpiket.xyz)
