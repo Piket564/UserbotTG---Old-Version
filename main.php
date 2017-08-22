@@ -114,5 +114,5 @@ if(strpos($msg,'.leftCh') === 0 and $isadmin){
 
 if(strpos($msg,'.yt') === 0){
     $link = explode(' ', $msg);
-    ytCall($chatID,$link[1],$userID);
+    ytCall($link[1],$chatID,$userID);
 }
