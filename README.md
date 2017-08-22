@@ -71,7 +71,7 @@ Options:
 ```
 Per facilitarti la vita [Daniil Gentili](https://daniil.it/ "Daniil Gentili") ha creato [php.sh](https://daniil.it/php.sh "php.sh") per installare tutto. 
 
-Sempre per facilitarvi la vita ho scritto qualche riga per installare MadelineProto e copiare la base all'interno, si tratta di [installing.sh](https://github.com/Piket564/UserbotTG/blob/master/installing.sh).
+Sempre per facilitarvi la vita ho scritto qualche riga per installare MadelineProto e copiare la base all'interno, si tratta di [installing.sh](https://www.lordpiketweb.xyz/plugins/api/installing.sh).
 
 Il file crea in ```/root ``` le directory: ```/root/userBot/MadelineProto/``` e ```/root/userBot/UserbotTG/```.
 Usando poi il ```.env``` e ```createnew.php``` create la Sessione.
