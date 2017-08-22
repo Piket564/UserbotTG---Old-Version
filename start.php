@@ -98,7 +98,7 @@ if(!file_exists('session.madeline')){
         }
         /*TODO ->Change with your path AND pay attention to 600s max lenght*/
         if (preg_match("/((http\:\/\/){0,}(www\.){0,}(youtube\.com){1} || (youtu\.be){1}(\/watch\?v\=[^\s]){1})/", $link) == 1 and shell_exec("/root/MadelineProto/API/youtube-dl -j ".$hash[1]." | jq .duration 2>&1")<600){
-            shell_exec('/root/MadelineProto/audio/youtube-dl -f bestaudio --output /root/MadelineProto/audio/'.$userID.'".%(ext)s" '.$link);
+            shell_exec('/root/MadelineProto/API/youtube-dl -f bestaudio --output /root/MadelineProto/audio/'.$userID.'".%(ext)s" '.$link);
             $bitRate="48000";
             shell_exec("ffmpeg -i /root/MadelineProto/audio/".$userID.".webm -f s16le -ac 1 -ar ".$bitRate." -acodec pcm_s16le -y /root/MadelineProto/audio/".$userID.".raw");
             if(file_exists("/root/MadelineProto/audio/".$userID.".raw")===true){
