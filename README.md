@@ -5,6 +5,39 @@ Questa è una base per MadelineProto, un client costruito per Telegram.
 
 **_ATTENZIONE! All'interno delle DOCS di Madeline è spiegato tutto molto attentamente, questa è SOLO una Base!_**
 
+**_MadelineProto è ora approvato da telegram:**_ [telegram.org/apps](https://telegram.org/apps)
+
+È una libreria per creare bot, userbot, e webradio(++).
+
+Può loggarsi come bot, o come utente telegram normale, e può:
+- gestire chat segrete
+- riprodurre file musicali in chiamate vocali
+- caricare/scaricare file fino a 1.5 gb
+- unirsi a gruppi
+- impostare password per l'autenticazione a due passaggi
+- eseguire pagamenti via bot
+- cambiare lo sfondo delle chat
+- segnalare utenti come spam
+- inviare messaggi a tutti gli utenti/gruppi nella propria lista chat
+- impostare bio, cambiare propic o nome
+- creare/eliminare gruppi/canali/supergruppi
+- creare account telegram
+- premere pulsanti di tastiere inline/normali
+- aggiungere contatti, aggiungere utenti a gruppi
+- ottenere le versioni instant view di pagine web
+- bloccare utenti
+- impostare limitazioni granulari agli utenti nei gruppi (vietato inviare sticker o gif o media o giochi o bot inline o link) e nei canali/supergruppi (possono inviare messaggi o modificare messaggi o eliminare messaggi o bannare utenti o invitare utenti o creare link d'invito o aggiungere admin o pinnare messaggi)
+- ottenere la lista completa dei membri di gruppi/canali
+- scaricare le traduzioni default di telegram direttamente dai loro server
+- cambiare la propria propic
+- creare/aggiungere/rimuovere sticker
+- creare/aggiungere/rimuovere bot
+- cercare messaggi/utenti
+- fare tutto quello che fanno i bot normali
+- fare tutto ciò che le app ufficiali possono fare
+
+Supporta tutti i maggiori linguaggi di programmazione (PHP/Lua/python/js/rust/c++/elixir/java/kotlin), e da oggi è approvata da Telegram, come potete vedere dalla lista dei client su [telegram.org/apps](https://telegram.org/apps)
+
 ## Iniziamo
 Prima di tutto, controlla di avere una VPS o un Raspberry Pi (anche un PC con distro Linux) 
 con installato LAMP, php7.0, php7.0-dev, composer e git. Potrebbero volerci altri pacchetti ma Google 
