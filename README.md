@@ -1,6 +1,8 @@
 # Userbot - PHP 
 Questa è una base per MadelineProto, un client costruito per Telegram. 
 
+** La versione di questa guida risale a quasi 2 anni fa! **
+
 **_[DOCS MadelineProto](https://daniil.it/MadelineProto/) Leggere Prima!_**
 
 **_ATTENZIONE! All'interno delle DOCS di Madeline è spiegato tutto molto attentamente, questa è SOLO una Base!_**
